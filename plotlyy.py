@@ -14,12 +14,14 @@ class Plot:
         self.second = []
         self.third = []
         self.fourth = []
-        self.total_elements = 6
+        self.total_elements = 2
         self.total_values = 8
         self.iterations = range(5, 5 * self.total_values + 1, 5)
         self.layout = None
         self.subplots_title = []
         self.memory_dict = OrderedDict()
+        self.show_legend = False
+        self.offset = 80
 
     @staticmethod
     def set_credentials_file():
@@ -79,7 +81,13 @@ class Plot:
                 trace_row += 1
 
         width, height = map(int, Plot.get_screen_resolution())
-        fig['layout'].update(width=width, height=height * self.total_elements, title='Memory Report', showlegend=False)
+        if self.show_legend:
+            fig['layout'].update(width=width - self.offset, height=height * self.total_elements, title='Memory Report',
+                                 showlegend=self.show_legend)
+        else:
+            fig['layout'].update(width=width, height=height * self.total_elements, title='Memory Report',
+                                 showlegend=self.show_legend)
+
         fig['layout']['title']['font']['size'] = 28
 
         plot(fig, filename='memory_dump.html', auto_open=True)
