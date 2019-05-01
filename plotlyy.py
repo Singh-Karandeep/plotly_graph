@@ -14,7 +14,7 @@ class Plot:
         self.second = []
         self.third = []
         self.fourth = []
-        self.total_elements = 2
+        self.total_elements = 10
         self.total_values = 8
         self.iterations = range(5, 5 * self.total_values + 1, 5)
         self.layout = None
